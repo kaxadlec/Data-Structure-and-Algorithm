@@ -1,6 +1,12 @@
 # data structure_algorithm #day01-2
 
 def insert_data(idx, pokemon):
+    """
+    선형 리스트의 idx위치에 원소 삽입
+    :param idx: int
+    :param pokemon:str
+    :return: void
+    """
     if idx < 0 or idx > len(pokemons):
         print("Out of range!")
         return
@@ -15,6 +21,11 @@ def insert_data(idx, pokemon):
 
 
 def delete_data(idx):
+    """
+    선형 리스트 idx 위치의 원소 삭제
+    :param idx: int
+    :return: str
+    """
     if idx < 0 or idx > len(pokemons):
         print("데이터를 삭제할 범위를 벗어났습니다.")
         return
@@ -38,6 +49,16 @@ def delete_data(idx):
     #     del (pokemons[len_pokemons - n])
 
 
+def add_data(pokemon):
+    """
+    선형 리스트의 맨 뒤에 원소 삽입
+    :param pokemon:
+    :return:
+    """
+    pokemons.append(None)
+    pokemons[len(pokemons)-1] = pokemon
+
+
 if __name__ == "__main__":
     pokemons = ["피카츄", "라이츄", "파이리", "꼬부기", "버터풀"]
     print(pokemons)
@@ -46,6 +67,8 @@ if __name__ == "__main__":
     print(pokemons)
     # insert_data(6, '피죤투')
     delete_data(3)
+    print(pokemons)
+    add_data('꼬링크')
     print(pokemons)
 
 
