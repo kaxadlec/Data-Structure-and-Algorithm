@@ -26,7 +26,12 @@ def delete_data(idx):
         pokemons[i - 1] = pokemons[i]
         pokemons[i] = None  # 배열의 맨 마지막 위치 삭제
 
-    del (pokemons[len_pokemons - 1])
+    pokemons.pop()
+    # del (pokemons[len_pokemons - 1])
+
+    # 입력한 위치 이후 모두 삭제되도록 하는 코드
+    # for n in range(1, len_pokemons):
+    #     del (pokemons[len_pokemons - n])
 
 
 if __name__ == "__main__":
