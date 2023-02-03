@@ -59,16 +59,34 @@ def add_data(pokemon):
     pokemons[len(pokemons)-1] = pokemon
 
 
+pokemons = []
+menu = -1
+
 if __name__ == "__main__":
-    pokemons = ["피카츄", "라이츄", "파이리", "꼬부기", "버터풀"]
-    print(pokemons)
-    # insert_data(2, '야도란')
-    delete_data(1)
-    print(pokemons)
-    # insert_data(6, '피죤투')
-    delete_data(3)
-    print(pokemons)
-    add_data('꼬링크')
-    print(pokemons)
+    while True:
+
+        menu = input("선택하세요(1: 추가, 2: 삽입, 3: 삭제, 4: 종료)--> ")
+
+        if menu == '1':
+            data = input("추가할 데이터--> ")
+            add_data(data)
+            print(pokemons)
+        elif menu == '2':
+            pos = int(input("삽입할 위치--> "))
+            data = input("추가할 데이터--> ")
+            insert_data(pos, data)
+            print(pokemons)
+        elif menu == '3':
+            pos = int(input("삭제할 위치--> "))
+            delete_data(pos)
+            print(pokemons)
+        elif menu == '4':
+            print(pokemons)
+            # exit
+            break
+        else:
+            print("1~4 중 하나를 입력하세요.")
+            continue
+
 
 
