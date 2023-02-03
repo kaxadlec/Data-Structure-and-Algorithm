@@ -29,7 +29,11 @@ def delete_data(idx):
     pokemons.pop()
     # del (pokemons[len_pokemons - 1])
 
-    # 입력한 위치 이후 모두 삭제되도록 하는 코드
+    # self 3-1 professor
+    # for _ in range(len_pokemons - idx):
+    #     pokemons.pop()
+
+    # self 3-1 my code
     # for n in range(1, len_pokemons):
     #     del (pokemons[len_pokemons - n])
 
