@@ -17,19 +17,19 @@ def print_nodes(start):     # 단순 연결 리스트의 전체 노드 출력. #
     print()
 
 
-def linkedlist(HanNum):
+def linkedlist(bts):
     global memory, head, current, pre
     print_nodes(head)
 
     node = Node()
-    node.data = HanNum
+    node.data = bts
 
     if head == None:    # 헤드가 비어있을 때 헤드에 첫 노드 지정.
         head = node
-        return              # ['가', '0']
+        return
 
-    if head.data[0] > HanNum[0]:    # 새로운 데이터가 첫 노드보다 작다면.
-        #print(f'{HanNum}은 한글숫자배열이다')
+
+    if head.data[1] > bts[1] :    # 새로운 데이터가 첫 노드보다 작다면.
         node.link = head
         head = node
         return
@@ -39,23 +39,24 @@ def linkedlist(HanNum):
     while current.link != None:
         pre = current
         current = current.link
-        if current.data[0] > HanNum[0]:     # 현재의 노드가 입력할 노드보다 크다면  (입력할 노드는 첫 노드보다 큼)
+        if current.data[1] > bts[1]:     # 현재의 노드가 입력할 노드보다 크다면  (입력할 노드는 첫 노드보다 큼)
             pre.link = node
             node.link = current
             return
 
-    current.link = node     # 삽입하는 노드가 가장 클 때 [Z]
+    current.link = node     # 삽입하는 노드가 가장 클 때
 
 
 # 전역 변수 선언 부분
 memory = []
 head, current, pre = None, None, None
-data_array = [["F","0"], ["E", "1"], ["C", "2"], ["D", "3"], ["Z", "4"]]
+data_array = [["지민", 180], ["정국", 177], ["뷔", 183], ["슈가", 175], ["진", 179]]
 
 
 if __name__ == "__main__":
     for data in data_array:
         linkedlist(data)
+
     print_nodes(head)
 
 
