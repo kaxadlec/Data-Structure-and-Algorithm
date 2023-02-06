@@ -30,7 +30,14 @@ node5.data = "5등"
 node4.link = node5
 print(node5.data)
 
+# 4-03.py
+new_node = Node()   # 새 노드 생성
+new_node.data = "새로움"   # 새 노드 데이터 대입
+new_node.link = node4.link  # 새 노드 링크에 4등->5등 링크 대입
+node4.link = new_node   # 4등의 링크에 새 노드 지정
 
+
+# 4-02.py
 current = node1
 print(current.data)
 while current.link != None:     # current 노드는 현재 노드1, current 노드의 링크와 연결된 노드가 있다면,
