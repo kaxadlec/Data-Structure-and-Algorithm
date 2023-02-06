@@ -4,6 +4,7 @@ class Node():
         self.data = None
         self.link = None
 
+
 node1 = Node()
 node1.data = "강아지"
 node1.link = node1
@@ -28,8 +29,17 @@ node5.data = "앵무새"
 node4.link = node5
 node5.link = node1
 
+#5-02
+node_a = Node()
+node_a.data = "호랑이"
+node_a.link = node2.link
+node2.link = node_a
+
+
 current = node1
 print(current.data, end=' ')
 while current.link != node1:
     current = current.link
     print(current.data, end=' ')
+
+
