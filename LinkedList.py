@@ -5,38 +5,34 @@ class Node():
         self.link = None
 
 
-node1 = Node()
-node1.data = "강아지"
-node1.link = node1
-
-node2 = Node()
-node2.data = "고양이"
-node1.link = node2
-#node2.link = node1
-
-node3 = Node()
-node3.data = "토끼"
-node2.link = node3
-#node3.link = node1
-
-node4 = Node()
-node4.data = "거북이"
-node3.link = node4
-#node4.link = node1
-
-node5 = Node()
-node5.data = "앵무새"
-node4.link = node5
-node5.link = node1
-
-# 05-03.py
-node3.link = node4.link
-del(node4)
-
-current = node1
-print(current.data, end=' ')
-while current.link != node1:
-    current = current.link
+def print_nodes(start):
+    current = start
+    if current.link == None:
+        return
     print(current.data, end=' ')
 
+    while current.link != start:    # 현재 노드의 링크가 첫 번째 노드가 아닐 때까지 반복
+        current = current.link
+        print(current.data, end=' ')
 
+    print()
+
+
+# 전역 변수 선언
+head, pre, current = None, None, None
+data_array = ["안양", "수원", "시흥", "성남", "용인"]
+
+if __name__ == "__main__":
+    node = Node()
+    node.data = data_array[0]
+    head = node
+    node.link = head        # 노드의 링크를 헤드에 연결
+
+    for data in data_array[1:]:
+        pre = node
+        node = Node()
+        node.data = data
+        pre.link = node
+        node.link = head    # 노드의 링크를 헤드에 연결 : 원형 연결 리스트이기 때문.
+
+    print_nodes(head)
