@@ -16,48 +16,48 @@ def print_nodes(start):     # 단순 연결 리스트의 전체 노드 출력. #
 
     print()
 
-def find_node(find_data):
-    global memory, pre, current, head
+
+def linkedlist(HanNum):
+    global memory, head, current, pre
+    print_nodes(head)
+
+    node = Node()
+    node.data = HanNum
+
+    if head == None:    # 헤드가 비어있을 때 헤드에 첫 노드 지정.
+        head = node
+        return              # ['가', '0']
+
+    if head.data[0] > HanNum[0]:    # 새로운 데이터가 첫 노드보다 작다면.
+        #print(f'{HanNum}은 한글숫자배열이다')
+        node.link = head
+        head = node
+        return
+
 
     current = head
-    if current.data == find_data:   # 찾는 노드가 첫번째 헤드 노드
-        return current
-
-    while current.link != None:     # 찾는 노드가 중간에
+    while current.link != None:
+        pre = current
         current = current.link
-        if current.data == find_data:
-            return current
+        if current.data[0] > HanNum[0]:     # 현재의 노드가 입력할 노드보다 크다면  (입력할 노드는 첫 노드보다 큼)
+            pre.link = node
+            node.link = current
+            return
 
-    return Node()                   # 찾는 노드가 없을 때
-
+    current.link = node     # 삽입하는 노드가 가장 클 때 [Z]
 
 
 # 전역 변수 선언 부분
 memory = []
 head, current, pre = None, None, None
-data_array = ['가', '나', '다', '라', '마']
+data_array = [["F","0"], ["E", "1"], ["C", "2"], ["D", "3"], ["Z", "4"]]
 
 
 if __name__ == "__main__":
-    node = Node()   # 빈 노드 생성
-    node.data = data_array[0]   # 노드 데이터에 '가' 대입
-    head = node     # 첫 번째 노드를 헤드로 지정
-    # memory.append(node)    #노드를 메모리에 넣음
-
-    for data in data_array[1:]:     # 두 번째부터의 노드
-        pre = node  # 기존 노드를 임시저장
-        node = Node()   # 빈 노드 생성
-        node.data = data    # '나', '다', '라', '마' for문에 따라 데이터에 대입
-        pre.link = node     # 기존 노드의 링크를 이번에 만든 노드에 연결
-        # memory.append(node)
+    for data in data_array:
+        linkedlist(data)
     print_nodes(head)
 
-    a = find_node("가")
-    print(a.data)
-    b = find_node("다")
-    print(b.data)
-    c = find_node("켁")
-    print(c.data)
 
 
 
