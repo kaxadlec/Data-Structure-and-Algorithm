@@ -29,12 +29,9 @@ node5.data = "앵무새"
 node4.link = node5
 node5.link = node1
 
-#5-02
-node_a = Node()
-node_a.data = "호랑이"
-node_a.link = node2.link
-node2.link = node_a
-
+# 05-03.py
+node3.link = node4.link
+del(node4)
 
 current = node1
 print(current.data, end=' ')
