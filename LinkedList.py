@@ -1,77 +1,35 @@
-import random
+# Circular Linked List
 class Node():
     def __init__(self):
         self.data = None
         self.link = None
 
-def print_nodes(start):
-        current = start
-        if current == None:
-            return
-        print(current.data, end=' ')
+node1 = Node()
+node1.data = "강아지"
+node1.link = node1
 
-        while current.link != None:
-            current = current.link
-            print(current.data, end=' ')
-        print()
+node2 = Node()
+node2.data = "고양이"
+node1.link = node2
+#node2.link = node1
 
+node3 = Node()
+node3.data = "토끼"
+node2.link = node3
+#node3.link = node1
 
-def dupli_num(num):
-    global pre, head, current
+node4 = Node()
+node4.data = "거북이"
+node3.link = node4
+#node4.link = node1
 
-    if head == None:
-        return False
+node5 = Node()
+node5.data = "앵무새"
+node4.link = node5
+node5.link = node1
 
-    current = head
-    if current.data == num:
-        return True
-
-    while current.link != None:
-        current = current.link
-        if current.data == num:
-            return True
-
-    return False
-
-
-def lotto_linked_list(num):
-    global pre, head, current
-
-    node = Node()
-    node.data = num
-
-    if head == None:    # 새 노드가 첫 노드
-        head = node
-        return
-
-    if head.data > num:    # if 첫 노드 > 새로운 노드
-        node.link = head
-        head = node
-        return
-
-    current = head
-    while current.link != None:
-        pre = current
-        current = current.link
-        if current.data > num:     # if 현재노드 > 입력할 노드
-            pre.link = node
-            node.link = current
-            return
-
-    current.link = node
-
-
-head, current, pre = None, None, None
-
-if __name__ == "__main__":
-    cnt = 0
-    while True:
-        lotto_num = random.randint(1, 45)   # 1에서 45까지 로또 무작위 번호 생성
-        if dupli_num(lotto_num):            # 중복된 숫자 제거 위한 함수
-            continue                        # True 이면 continue
-
-        lotto_linked_list(lotto_num)
-        cnt = cnt + 1
-        if cnt > 5:
-            break
-    print_nodes(head)
+current = node1
+print(current.data, end=' ')
+while current.link != node1:
+    current = current.link
+    print(current.data, end=' ')
