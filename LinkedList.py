@@ -1,5 +1,6 @@
 # Circular Linked List
 import random
+import math
 
 
 class Node():
@@ -8,7 +9,7 @@ class Node():
         self.link = None
 
 
-def print_nodes(start):
+def print_stores(start):
     current = start
     if current.link == None:
         return
@@ -16,42 +17,49 @@ def print_nodes(start):
 
     while current.link != start:    # 현재 노드의 링크가 첫 번째 노드가 아닐 때까지 반복
         current = current.link
-        print(current.data, end=' ')
-
+        x, y = current.data[1:]
+        print(current.data[0], '편의점: 거리', math.sqrt(x*x + y*y))
     print()
 
 
-def count_odd_even():
-    global head, current
-    even, odd = 0, 0
+def store_list(store):
+    global head, current, pre
+
+    node = Node()
+    node.data = store
+
+    if head == None:
+        head = node
+        node.link = head
+        return
+
+    node_x, node_y = node.data[1:]
+    node_dis = math.sqrt(node_x * node_x + node_y * node_y)
+    head_x, head_y = head.data[1:]
+    head_dist = math.sqrt(head_x*head_x + head_y * head_y)
+
+    if head_dist > node_dis:
+        node.link = head
+        last = head
+        while last.link != head:
+            last = last.link
+        last.link = node
+        head = node
+        return
 
     current = head
-    while True:
-        if current.data % 2 == 0:
-            even = even + 1
-        else:
-            odd = odd + 1
-        if current.link == head:
-            break
+    while current.link != head:
+        pre = current
         current = current.link
+        current_x , current_y = current.data[1:]
+        current_dis = math.sqrt(current_x * current_x + current_y * current_y)
+        if current_dis > node_dis:
+            pre.link = node
+            node.link = current
+            return
 
-    return odd, even
-
-
-def make_zero_num(odd, even):
-    if odd > even:
-        remainder = 1
-    else:
-        remainder = 0
-
-    current = head
-    while True:
-        if current.data % 2 == remainder:
-            current.data = current.data * -1
-        if current.link == head:
-            break
-        current = current.link
-
+    current.link = node
+    node.link = head
 
 
 # 전역 변수 선언
@@ -59,26 +67,14 @@ head, pre, current = None, None, None
 
 
 if __name__ == "__main__":
-    data_array = []
-    for _ in range(7):
-        data_array.append(random.randint(1,50))
+    store_array = []
+    store_name = 'A'
+    for _ in range(10):
+        store = (store_name, random.randint(1, 100), random.randint(1, 100))
+        store_array.append(store)
+        store_name = chr(ord(store_name)+1)
 
-    node = Node()
-    node.data = data_array[0]
-    head = node
-    node.link = head  # 노드의 링크를 헤드에 연결
+    for store in store_array:
+        store_list(store)
 
-    for data in data_array[1:]:
-        pre = node
-        node = Node()
-        node.data = data
-        pre.link = node
-        node.link = head  # 노드의 링크를 헤드에 연결 : 원형 연결 리스트이기 때문.
-
-    print_nodes(head)
-
-    odd_count, even_count = count_odd_even()
-    print(f'홀수는 {odd_count}개, 짝수는 {even_count}개')
-
-    make_zero_num(odd_count, even_count)
-    print_nodes(head)
+    print_stores(head)
