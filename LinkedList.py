@@ -1,3 +1,4 @@
+import random
 class Node():
     def __init__(self):
         self.data = None
@@ -15,25 +16,44 @@ def print_nodes(start):
         print()
 
 
-def LinkedList(name_email):
+def dupli_num(num):
+    global pre, head, current
+
+    if head == None:
+        return False
+
+    current = head
+    if current.data == num:
+        return True
+
+    while current.link != None:
+        current = current.link
+        if current.data == num:
+            return True
+
+    return False
+
+
+def lotto_linked_list(num):
     global pre, head, current
 
     node = Node()
-    node.data = name_email
+    node.data = num
+
     if head == None:    # 새 노드가 첫 노드
         head = node
         return
 
-    if head.data[1] > name_email[1]:    # if 첫 노드 > 새로운 노드
+    if head.data > num:    # if 첫 노드 > 새로운 노드
         node.link = head
         head = node
         return
 
-    current = head      #
+    current = head
     while current.link != None:
         pre = current
         current = current.link
-        if current.data[1] > name_email[1]:     # if 현재노드 > 입력할 노드
+        if current.data > num:     # if 현재노드 > 입력할 노드
             pre.link = node
             node.link = current
             return
@@ -44,12 +64,14 @@ def LinkedList(name_email):
 head, current, pre = None, None, None
 
 if __name__ == "__main__":
-
+    cnt = 0
     while True:
-        name = input("이름: ")
-        if name == None:
-            break
-        email = input("이메일: ")
-        LinkedList([name, email])
+        lotto_num = random.randint(1, 45)   # 1에서 45까지 로또 무작위 번호 생성
+        if dupli_num(lotto_num):            # 중복된 숫자 제거 위한 함수
+            continue                        # True 이면 continue
 
-        print_nodes(head)
+        lotto_linked_list(lotto_num)
+        cnt = cnt + 1
+        if cnt > 5:
+            break
+    print_nodes(head)
