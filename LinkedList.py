@@ -36,6 +36,9 @@ new_node.data = "새로움"   # 새 노드 데이터 대입
 new_node.link = node4.link  # 새 노드 링크에 4등->5등 링크 대입
 node4.link = new_node   # 4등의 링크에 새 노드 지정
 
+# 4-04.py
+node2.link = node3.link  # 3등의 링크를 2등의 링크로 복사
+del(node3)  # 3등 삭제
 
 # 4-02.py
 current = node1
