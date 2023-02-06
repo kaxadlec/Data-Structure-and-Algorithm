@@ -18,37 +18,29 @@ def print_nodes(start):
     print()
 
 
+def delete_node(delete_data):
+    global pre, head, current
 
-def insert_node(find_data, insert_data):
-    global head, current, pre
-
-    if head.data == find_data:  # 맨 앞에(첫번째 노드) 삽입할 경우
-        node = Node()
-        node.data = insert_data
-        node.link = head
-        last = head
-        while last.link != head:
+    # 첫번째 노드 삭제
+    if head.data == delete_data:
+        current = head    # 현재 노드를 삭제할 노드와 같게 만듬.
+        head = head.link  # head를 링크가 가리키던 옆에 노드로 변경
+        last = head       # last의 시작은 헤드
+        while last.link != current:  # 헤드에서 시작해서 마지막 노드를 옆으로 이동하면서 찾는다
             last = last.link
-        last.link = node
-        head = node
+        last.link = head    # 마지막 노드 링크는 헤드가 가리키는 노드
+        del(current)        # 현재 노드 삭제
         return
-    # 중간에 노드 삽입할 경우
-    current = head     # 헤드부터 시작해서 현재, current 노드가  find_data인지 확인
-    while current.link != head:
+
+        # 첫번째 외 노드 삭제
+    current = head    # 현재 노드 헤드에서 시작
+    while current.link != head:     # 헤드에서 시작해서 현재 노드 확인
         pre = current
         current = current.link
-        if current.data == find_data:
-            node = Node()
-            node.data = insert_data
-            node.link = current  # 새로만든 노드는 current 노드로 링크
-            pre.link = node      # pre 링크는 노드로
+        if current.data == delete_data:     # 현재 노드의 데이터가 삭제할 데이터와 같으면
+            pre.link = current.link         # 이전 노드 링크를 현재 노드 링크로 둔다.
+            del(current)                    # 현재 노드 삭제
             return
-
-    # 마지막에 노드 삽입할 경우
-    node = Node()
-    node.data = insert_data
-    current.link = node
-    node.link = head
 
 
 # 전역 변수 선언
@@ -70,9 +62,10 @@ if __name__ == "__main__":
 
     print_nodes(head)
 
-    insert_node("안양", "동두천")
+    delete_node("안양")
     print_nodes(head)
-    insert_node("성남", "파주")
+
+    delete_node("용인")
     print_nodes(head)
-    insert_node("평양", "부천")
+    delete_node("평양")
     print_nodes(head)
