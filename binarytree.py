@@ -5,7 +5,7 @@ class tree_node:
         self.right = None
 
 root = None
-club_array = ['첼시', '아스날', '토트넘', '맨유', '맨시티', '뉴캐슬', '리버풀']
+club_array = ['첼시', '아스날', '토트넘', '맨유', '맨시티', '리버풀']
 
 # main
 node = tree_node()  # 트리 노드 생성
