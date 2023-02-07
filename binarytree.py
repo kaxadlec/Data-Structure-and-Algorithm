@@ -34,7 +34,7 @@ for fc in club_array[1:]:     # 클럽 배열의 1번자리부터 처리
                 current.right = node
                 break
 
-find_name = '브랜드포드'
+find_name = input("찾을 epl 클럽 이름을 입력하세요: ")
 current = root
 
 while True:
