@@ -1,4 +1,6 @@
+import webbrowser
 import time
+
 
 # 함수 선언 부분
 def is_stack_full():
@@ -44,34 +46,6 @@ def peek() :
     return stack[top]
 
 
-def check_bracket(expr):
-    for ch in expr:
-        if ch in '([{<':
-            push(ch)
-
-        elif ch in ')]}>':
-            out = pop()
-            if ch == ')' and out == '(':
-                pass
-            elif ch == ']' and out == '[':
-                pass
-            elif ch == '}' and out == '{':
-                pass
-            elif ch == '>' and out == '<':
-                pass
-            else:
-                return False
-
-        else:
-            pass
-
-    return is_stack_empty()
-    # if is_stack_empty():
-    #     return True
-    # else:
-    #     return False
-
-
 # 전역 변수 선언 부분
 SIZE = 100
 stack = [ None for _ in range(SIZE) ]
@@ -79,10 +53,23 @@ top = -1
 
 
 # 메인 코드 부분
-if __name__ == "__main__":
+if __name__ == "__main__" :
+    urls = ['youtube.com', 'google.com', 'music.youtube.com']
 
-    expr_array = ['(2*[3+1)]', ')A+B(', '((A+B)-C', '(A+B]', '(<A+{B-C}/[C*D]>)']
+    for url in urls:
+        push(url)
+        webbrowser.open('http://' + url)
+        print(url, end='-->')
+        time.sleep(1)
 
-    for expr in expr_array:
-        top = -1
-        print(expr, '==>', check_bracket(expr))
+    print("방문 종료")
+    time.sleep(5)
+
+    while True:
+        url = pop()
+        if url == None:
+            break
+        webbrowser.open('http://' + url)
+        print(url, end='-->')
+        time.sleep(1)
+    print("방문 종료")
