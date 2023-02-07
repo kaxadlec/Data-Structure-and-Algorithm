@@ -54,4 +54,3 @@ if __name__ == "__main__" :
         print("waiting list --> ", queue)
         enqueue(call)
         print()
-
