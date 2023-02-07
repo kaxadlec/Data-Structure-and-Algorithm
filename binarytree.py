@@ -34,24 +34,51 @@ for fc in club_array[1:]:     # 클럽 배열의 1번자리부터 처리
                 current.right = node
                 break
 
-find_name = input("찾을 epl 클럽 이름을 입력하세요: ")
+
+delete_fc = '토트넘'
+
 current = root
+parent = None      # 삭제할 노드의 상위 노드를 저장할 변수 선언
 
 while True:
-    if find_name == current.data:
-        print(f'{find_name}을 찾았습니다')
-        break
-    elif find_name < current.data:
-        if current.left is not None:
-            current = current.left
-        elif current.left is None:
-            print(f'{find_name}은 없습니다')
-            break
-    elif find_name > current.data:
-        if current.right is not None:
-            current = current.right
-        elif current.right is None:
-            print(f'{find_name}은 없습니다')
-            break
+    if delete_fc == current.data:
+        if current.left is None and current.right is None:
+            if parent.left == current:
+                parent.left = None
+            elif parent.right == current:
+                parent.right = None
+            del(current)
 
+        elif current.left is not None and current.right is None:
+            if parent.left == current:
+                parent.left = current.left
+            elif parent.right == current:
+                parent.right = current.left
+            del(current)
+
+        elif current.left is None and current.right is not None:
+            if parent.left == current:
+                parent.left = current.right
+            elif parent.right == current:
+                parent.right = current.right
+            del(current)
+
+        print(f'{delete_fc} 삭제됨')
+        break
+
+    elif delete_fc < current.data:
+        if current.left is None:
+            print(f'{delete_fc}는 트리에 없습니다')
+            break
+        else:
+            parent = current
+            current = current.left
+
+    elif delete_fc > current.data:
+        if current.right is None:
+            print(f'{delete_fc}는 트리에 없습니다')
+            break
+        else:
+            parent = current
+            current = current.right
 
