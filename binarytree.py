@@ -34,5 +34,24 @@ for fc in club_array[1:]:     # 클럽 배열의 1번자리부터 처리
                 current.right = node
                 break
 
-print("check")
+find_name = '브랜드포드'
+current = root
+
+while True:
+    if find_name == current.data:
+        print(f'{find_name}을 찾았습니다')
+        break
+    elif find_name < current.data:
+        if current.left is not None:
+            current = current.left
+        elif current.left is None:
+            print(f'{find_name}은 없습니다')
+            break
+    elif find_name > current.data:
+        if current.right is not None:
+            current = current.right
+        elif current.right is None:
+            print(f'{find_name}은 없습니다')
+            break
+
 
