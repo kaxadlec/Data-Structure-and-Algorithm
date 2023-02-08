@@ -1,51 +1,34 @@
-# Breadth First Search - BFS
-from collections import deque
-
-
 class Graph:
     def __init__(self, size):
-        self.big = size
-        self.graph = [[0 for x in range(size)] for x in range(size)]
+        self.size = size
+        self.graph = [[0 for i in range(size)] for i in range(size)]
 
 
-my_g = None
-# queue = []
-queue = deque([])
-visited_array = []
+undi = None
+di = None
 
-my_g = Graph(9)     # 그래프 size
-my_g.graph[0][1] = 1; my_g.graph[0][2] = 1; my_g.graph[0][4] = 1
-my_g.graph[1][0] = 1; my_g.graph[1][2] = 1; my_g.graph[1][3] = 1
-my_g.graph[2][0] = 1; my_g.graph[2][1] = 1; my_g.graph[2][3] = 1; my_g.graph[2][4] = 1; my_g.graph[2][5] = 1
-my_g.graph[3][1] = 1; my_g.graph[3][2] = 1
-my_g.graph[4][0] = 1; my_g.graph[4][2] = 1; my_g.graph[4][6] = 1; my_g.graph[4][7] = 1
-my_g.graph[5][2] = 1
-my_g.graph[6][4] = 1; my_g.graph[6][8] = 1
-my_g.graph[7][4] = 1; my_g.graph[7][8] = 1
-my_g.graph[8][6] = 1; my_g.graph[8][7] = 1
+undi = Graph(5)     # 무방향 그래프, 사이즈는 5
+undi.graph[0][1] = 1; undi.graph[0][3] = 1; undi.graph[0][4] = 1
+undi.graph[1][0] = 1; undi.graph[1][2] = 1; undi.graph[1][4] = 1
+undi.graph[2][1] = 1; undi.graph[2][3] = 1; undi.graph[2][4] = 1
+undi.graph[3][0] = 1; undi.graph[3][2] = 1
+undi.graph[4][0] = 1; undi.graph[4][1] = 1; undi.graph[4][2] = 1
+
+print("무방향 그래프입니다")
+for i in range(5):
+    for n in range(5):
+        print(undi.graph[i][n], end=' ')
+    print()
+
+di = Graph(4)
+di.graph[0][3] = 1; di.graph[1][3] = 1
+di.graph[1][2] = 1
+
+print("방향 그래프입니다")
+for i in range(4):
+    for n in range(4):
+        print(di.graph[i][n], end=' ')
+    print()
 
 
-current = 0
-queue.append(current)
-visited_array.append(current)
 
-while len(queue) != 0:
-    next = None
-    for vertex in range(9):
-        if my_g.graph[current][vertex] == 1:
-            if vertex in visited_array:
-                pass
-            else:
-                next = vertex
-                break
-    if next is not None:
-        current = next
-        queue.append(current)
-        visited_array.append(current)
-
-    else:
-        current = queue.popleft()   # pop() 대신 popleft() 사용
-
-for i in visited_array:
-    print(i, end= ' --->  ')
-print('END')
