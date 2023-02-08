@@ -6,21 +6,17 @@ class Graph:
 cfc = None
 stack = []
 visited_array = []
+name_array = ["Mount", "James", "Kante", "Kepa", "Mudryk", "Fofana"]
+Mount, James, Kante, Kepa, Mudryk, Fofana = 0,1,2,3,4,5
 
-cfc = Graph(3)
-cfc.graph[0][1] = 1
-cfc.graph[0][2] = 1
-cfc.graph[1][2] = 1
-cfc.graph[2][0] = 1
-cfc.graph[2][1] = 1
-cfc.graph[1][0] = 1
+cfc = Graph(6)
+cfc.graph[0][1] =1; cfc.graph[0][2] =1
+cfc.graph[1][0] =1; cfc.graph[1][3] =1
+cfc.graph[2][0] =1; cfc.graph[2][3] =1;
+cfc.graph[3][1] =1; cfc.graph[3][2] =1; cfc.graph[3][4] =1; cfc.graph[3][5] =1
+cfc.graph[4][3] =1; cfc.graph[4][5] =1
+cfc.graph[5][3] =1; cfc.graph[5][4] =1
 
-# 무방향 그래프 출력
-print("무방향그래프")
-for i in range(3):
-    for n in range(3):
-        print(cfc.graph[i][n], end=' ')
-    print()
 
 current = 0
 stack.append(current)
@@ -29,7 +25,7 @@ visited_array.append(current)
 while len(stack) != 0:
     next = None
 
-    for vertex in range(3):
+    for vertex in range(6):
         if cfc.graph[current][vertex] == 1:
             if vertex in visited_array:
                 pass
@@ -45,8 +41,10 @@ while len(stack) != 0:
     else:
         current = stack.pop()
 
+print("방문순서-->", end=' ')
 for z in visited_array:
-    print(chr(ord('A')+z), end =' ')
+    print(name_array[z], end = ' ')
+
 
 
 
