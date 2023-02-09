@@ -1,18 +1,40 @@
-def score_sort(array):
-    n = len(array)
-    for end in range(1,n):
-        for current in range(end, 0, -1):
-            if array[current-1][1] > array[current][1]:
-                array[current-1], array[current] = array[current], array[current-1]
-    return array
+import random
+import time
 
-score_array = [['James', 40], ['Mason', 70], ['Thiago', 80], ['Kai', 60], ['Trevoh',5]]
+def quick_sort(array, start, end):
+    if end <= start:
+        return
+    low = start
+    high = end
 
-print('정렬 전 --> ' , score_array)
-score_array = score_sort(score_array)
-print('정렬 후 --> ', score_array)
+    pivot = array[(low + high) // 2]
+    while low <= high:
+        while array[low] < pivot:
+            low = low + 1
+        while array[high] > pivot:
+            high = high - 1
+        if low <= high:
+            array[low], array[high] = array[high], array[low]
+            low, high = low + 1, high -1
 
-print('스코어별 조편성')
-for i in range(len(score_array)//2):
-    print(score_array[i][0], ':', score_array[len(score_array)-1-i][0])
+    mid = low
 
+    quick_sort(array, start, mid -1)
+    quick_sort(array, mid, end)
+
+def sort(array):
+    quick_sort(array, 0, len(array) -1)
+
+
+data_array = [1000, 10000, 12000, 15000]
+
+for data in data_array:
+    temp_array = [random.randint(10000, 99999) for _ in range(data)]
+    quick_array = temp_array[:]
+
+    print("데이터 수: ", data)
+    start = time.time()
+    sort(quick_array)
+    end = time.time()
+    print(f'퀵 정렬 --> {end-start} 초')
+    print()
